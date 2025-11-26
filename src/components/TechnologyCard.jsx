@@ -1,11 +1,12 @@
 import "./TechnologyCard.css"
 
-function TechnologyCard({ title, description, status }) {
+function TechnologyCard({ technology, chSt }) {
     return (
-        <div className="tech-card">
-            <h3>{title}</h3>
-            <p>{description}</p>
-            <p>Статус: {status === "completed" ? '✅' : (status === "in-progress" ? '⏳' : '❌')}</p>
+        <div className={`tech-card ${technology.status}`}>
+            <h3>{technology.title}</h3>
+            <p>{technology.description}</p>
+            <p>Статус: {technology.status === "completed" ? '✅' : (technology.status === "in-progress" ? '⏳' : '❌')}</p>
+            <button onClick={()=>{chSt(technology.id)}}>Сменить статус</button>
         </div>
     );
 }
