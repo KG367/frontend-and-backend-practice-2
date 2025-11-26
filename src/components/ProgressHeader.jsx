@@ -1,3 +1,5 @@
+import "./ProgressHeader.css"
+
 function ProgressHeader({techs}) {
     return (
         <div>
