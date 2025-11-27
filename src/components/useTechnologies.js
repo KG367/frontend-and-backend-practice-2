@@ -34,18 +34,22 @@ export default function useTechnologies() {
     // выполнение загрузки данных только при первом рендере
     useEffect(() => {
         const saved = localStorage.getItem("technologies");
-        if (saved)
+        if (saved) {
             // eslint-disable-next-line react-hooks/set-state-in-effect
             setTechnologies(JSON.parse(saved));
+            console.log("Данные загружены из localStorage");
+        }
     }, []);
 
     // сохранение изменений technologies
     useEffect(() => {
-        if (localStorage.getItem("technologies"))
+        if (localStorage.getItem("technologies")) {
             localStorage.setItem(
                 "technologies",
                 JSON.stringify(technologies)
             );
+            console.log("Данные сохранены в localStorage");
+        }
     }, [technologies]);
     // Функция для обновления статуса технологии
     const updateStatus = (techId) => {
