@@ -11,12 +11,23 @@ function QuickActions({ completeAll, resetAll, random }) {
 function Filters({ setFilter }) {
     return (
         <div>
-            <button onClick={()=>setFilter("all")}>Показать все</button>
-            <button onClick={()=>setFilter("not-started")}>Показать не начатые</button>
-            <button onClick={()=>setFilter("in-progress")}>Показать в прогрессе</button>
-            <button onClick={()=>setFilter("completed")}>Показать завершённые</button>
+            <button onClick={() => setFilter("all")}>Показать все</button>
+            <button onClick={() => setFilter("not-started")}>Показать не начатые</button>
+            <button onClick={() => setFilter("in-progress")}>Показать в прогрессе</button>
+            <button onClick={() => setFilter("completed")}>Показать завершённые</button>
         </div>
     )
 }
 
-export { QuickActions, Filters };
+function Search({ query, setQuery }) {
+    return <div className="search-box">
+        <input
+            type="text"
+            placeholder="Поиск технологий..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+        />
+    </div>
+}
+
+export { QuickActions, Filters, Search };
