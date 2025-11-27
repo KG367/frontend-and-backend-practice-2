@@ -4,6 +4,7 @@
     align-items: center;
     max-width: 300px;
     padding: 0.5rem;
+    margin-top: 10px;
 
     transition: border 350ms linear,
                 transform 500ms ease-in-out;
@@ -35,4 +36,5 @@ h3 {
 
 p {
     font-style: italic;
+    color:white;
 }

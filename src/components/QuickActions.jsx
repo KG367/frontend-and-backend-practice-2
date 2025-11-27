@@ -1,33 +1,43 @@
-function QuickActions({ completeAll, resetAll, random }) {
+import { useState } from 'react';
+import Modal from './Modal.jsx';
+
+function QuickActions({ onMarkAllCompleted, onResetAll, technologies }) {
+    const [showExportModal, setShowExportModal] = useState(false);
+    const handleExport = () => {
+        const data = {
+            exportedAt: new Date().toISOString(),
+            technologies: technologies
+        };
+        const dataStr = JSON.stringify(data, null, 2);
+        // Здесь можно добавить логику для скачивания файла
+        console.log('Данные для экспорта:', dataStr);
+        setShowExportModal(true);
+    };
     return (
-        <div>
-            <button onClick={completeAll}>Отметить все как выполненное</button>
-            <button onClick={resetAll}>Сбросить все</button>
-            <button onClick={random}>Переключение на следующего случайного элемента</button>
+        <div className="quick-actions">
+            <h3>Быстрые действия</h3>
+            <div className="action-buttons">
+                <button onClick={onMarkAllCompleted} className="btn btn-success">
+                    ✅ Отметить все как выполненные
+                </button>
+                <button onClick={onResetAll} className="btn btn-warning">
+                    🔄 Сбросить все статусы
+                </button><button onClick={handleExport} className="btn btn-info">
+                    📤 Экспорт данных
+                </button>
+            </div>
+            <Modal
+                isOpen={showExportModal}
+                onClose={() => setShowExportModal(false)}
+                title="Экспорт данных"
+            >
+                <p>Данные успешно подготовлены для экспорта!</p> {/* idk why this isn't work*/}
+                <p>Проверьте консоль разработчика для просмотра данных.</p>
+                <button onClick={() => setShowExportModal(false)}>
+                    Закрыть
+                </button>
+            </Modal>
         </div>
-    )
+    );
 }
-
-function Filters({ setFilter }) {
-    return (
-        <div>
-            <button onClick={() => setFilter("all")}>Показать все</button>
-            <button onClick={() => setFilter("not-started")}>Показать не начатые</button>
-            <button onClick={() => setFilter("in-progress")}>Показать в прогрессе</button>
-            <button onClick={() => setFilter("completed")}>Показать завершённые</button>
-        </div>
-    )
-}
-
-function Search({ query, setQuery }) {
-    return <div className="search-box">
-        <input
-            type="text"
-            placeholder="Поиск технологий..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-        />
-    </div>
-}
-
-export { QuickActions, Filters, Search };
+export default QuickActions;
