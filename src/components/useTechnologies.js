@@ -43,11 +43,11 @@ export default function useTechnologies() {
 
     // сохранение изменений technologies
     useEffect(() => {
-            localStorage.setItem(
-                "technologies",
-                JSON.stringify(technologies)
-            );
-            console.log("Данные сохранены в localStorage");
+        localStorage.setItem(
+            "technologies",
+            JSON.stringify(technologies)
+        );
+        console.log("Данные сохранены в localStorage");
     }, [technologies]);
     // Функция для обновления статуса технологии
     const updateStatus = (techId) => {
