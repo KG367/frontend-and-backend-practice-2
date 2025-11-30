@@ -1,29 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import "./TechnologyDetail.css";
-function TechnologyDetail() {
+function TechnologyDetail({ technologies, changeStatus }) {
     const { techId } = useParams();
     const [technology, setTechnology] = useState(null);
     useEffect(() => {
-        const saved = localStorage.getItem('technologies');
-        if (saved) {
-            const technologies = JSON.parse(saved);
-            const tech = technologies.find(t => t.id === parseInt(techId));
-            // eslint-disable-next-line react-hooks/set-state-in-effect
-            setTechnology(tech);
-        }
-    }, [techId]);
-    const updateStatus = (newStatus) => {
-        const saved = localStorage.getItem('technologies');
-        if (saved) {
-            const technologies = JSON.parse(saved);
-            const updated = technologies.map(tech =>
-                tech.id === parseInt(techId) ? { ...tech, status: newStatus } : tech
-            );
-            localStorage.setItem('technologies', JSON.stringify(updated));
-            setTechnology({ ...technology, status: newStatus });
-        }
-    };
+        const tech = technologies.find(t => t.id == parseInt(techId));
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setTechnology(tech);
+    }, [technologies, techId]);
     if (!technology) {
         return (
             <div className="page">
@@ -52,19 +37,19 @@ function TechnologyDetail() {
                     <h3>Статус изучения</h3>
                     <div className="status-buttons">
                         <button
-                            onClick={() => updateStatus('not-started')}
+                            onClick={() => changeStatus(techId, 'not-started')}
                             className={technology.status === 'not-started' ? 'active' : ''}
                         >
                             Не начато
                         </button>
                         <button
-                            onClick={() => updateStatus('in-progress')}
+                            onClick={() => changeStatus(techId, 'in-progress')}
                             className={technology.status === 'in-progress' ? 'active' : ''}
                         >
                             В процессе
                         </button>
                         <button
-                            onClick={() => updateStatus('completed')}
+                            onClick={() => changeStatus(techId, 'completed')}
                             className={technology.status === 'completed' ? 'active' : ''}
                         >
                             Завершено

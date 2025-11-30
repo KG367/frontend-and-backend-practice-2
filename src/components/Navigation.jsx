@@ -43,10 +43,18 @@ function Navigation() {
                 </li>
                 <li>
                     <Link
-                        to="settings"
+                        to="/settings"
                         className={location.pathname === "/settings" ? 'active' : ''}
                     >
                         Настройки
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to="/spell"
+                        className={location.pathname === "/spell" ? 'active' : ""}
+                    >
+                        Случайное заклинание
                     </Link>
                 </li>
             </ul>
